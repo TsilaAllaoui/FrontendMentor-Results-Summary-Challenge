@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import reaction from "./assets/images/icon-reaction.svg";
 import memory from "./assets/images/icon-memory.svg";
 import verbal from "./assets/images/icon-verbal.svg";
 import visual from "./assets/images/icon-visual.svg";
+import datas from "./data.json";
 
 interface Stat {
   color: string;
@@ -28,32 +29,27 @@ const StatComponent = ({ stat }: { stat: Stat }) => {
 };
 
 function App() {
-  const [stats, setStats] = useState<Stat[]>([
-    {
-      color: "rgb(255,0,0,.05)",
-      icon: reaction,
-      name: "Reaction",
-      value: 80,
-    },
-    {
-      color: "rgba(235,186,84,.05)",
-      icon: memory,
-      name: "Memory",
-      value: 92,
-    },
-    {
-      color: "rgba(0,255,0,.05)",
-      icon: verbal,
-      name: "Verbal",
-      value: 61,
-    },
-    {
-      color: "rgba(0,0,255,.05)",
-      icon: visual,
-      name: "Visual",
-      value: 72,
-    },
-  ]);
+  const [stats, setStats] = useState<Stat[]>([]);
+
+  useEffect(() => {
+    const icons = [reaction, memory, verbal, visual];
+    const colors = [
+      "rgb(255,0,0,.05)",
+      "rgb(235,186,84,.05)",
+      "rgb(0,255,0,.05)",
+      "rgb(0,0,255,.05)",
+    ];
+    let parsedData: Stat[] = [];
+    datas.forEach((data, index) => {
+      parsedData.push({
+        name: data.category,
+        value: data.score,
+        icon: icons[index],
+        color: colors[index],
+      });
+    });
+    setStats(parsedData);
+  }, []);
 
   return (
     <div id="app">
@@ -71,7 +67,8 @@ function App() {
       <div id="right">
         <p>Summary</p>
         <div id="stats">
-          {stats && stats.map((stat) => <StatComponent stat={stat} />)}
+          {stats &&
+            stats.map((stat) => <StatComponent key={stat.name} stat={stat} />)}
         </div>
         <button>Continue</button>
       </div>

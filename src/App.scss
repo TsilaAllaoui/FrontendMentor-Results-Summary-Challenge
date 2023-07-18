@@ -1,6 +1,6 @@
 #app {
-  height: 46svh;
-  width: 63svw;
+  height: 50svh;
+  width: 35svw;
   background-color: white;
   display: flex;
   border-radius: 1rem;
@@ -100,6 +100,9 @@
         align-items: center;
         margin: 0;
         height: 2.5rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        padding: 0 0.5rem;
 
         p {
           margin: 0;
@@ -155,6 +158,84 @@
           rgb(74, 59, 213),
           rgb(51, 45, 233)
         );
+      }
+    }
+  }
+}
+
+@media (max-width: 416px) {
+  #app {
+    flex-direction: column;
+    height: 100svh;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+
+    #left {
+      border-radius: 0 0 1rem 1rem;
+      width: 100%;
+      margin: 0;
+
+      p {
+        &:first-of-type {
+          margin-top: 2rem;
+          font-size: 1.5rem;
+        }
+
+        &:nth-of-type(2) {
+          font-size: 1.75rem;
+          font-family: "HankenGrotesk Bold";
+        }
+
+        &:nth-of-type(3) {
+          font-size: 1.25rem;
+          margin-bottom: 3rem;
+        }
+      }
+
+      #circle {
+        width: 11rem;
+        height: 11rem;
+        #percent {
+          font-size: 5rem;
+        }
+
+        #percent-total {
+          font-size: 1.25rem;
+        }
+      }
+    }
+    #right {
+      width: 100%;
+      height: 60%;
+
+      p {
+        font-size: 1.5rem;
+      }
+
+      #stats {
+        width: 100%;
+        margin: 0 2rem;
+        .stat {
+          width: 68%;
+          padding: 0 1.5rem;
+          height: 4.5rem;
+
+          img {
+            transform: scale(2);
+          }
+
+          p {
+            font-size: 1.25rem;
+            margin-left: 1rem;
+          }
+        }
+      }
+
+      button {
+        height: 4rem;
+        width: 85%;
+        font-size: 1.4rem;
       }
     }
   }
